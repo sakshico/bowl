@@ -1,0 +1,376 @@
+/* ============================================================
+   CHECKOUT PAGE — standalone, scoped styles
+   ============================================================ */
+
+.rc-checkout{
+  font-size: clamp(11px, 1.3vw + 5px, 17px);
+  font-family: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  color: #2B2B24;
+  background: #F6F1E7;
+  min-height: 100vh;
+  padding: 1.6em 1.6em 2em;
+  --rc-olive: #4B5A3F;
+  --rc-gold:  #B8863B;
+  --rc-line:  rgba(43,43,36,0.15);
+}
+.rc-checkout *{ box-sizing: border-box; }
+.rc-checkout a{ text-decoration: none; color: inherit; }
+.rc-checkout button{ font-family: inherit; cursor: pointer; }
+
+.rc-co-back{
+  display:inline-flex;
+  align-items:center;
+  gap:0.4em;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.rc-co-back svg{ width:1em; height:1em; stroke:#2B2B24; fill:none; stroke-width:2; }
+
+.rc-co-header{ text-align:center; margin: 1em 0 1.6em; }
+.rc-co-eyebrow{
+  display:block;
+  font-size: 0.7em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rc-gold);
+  font-weight: 700;
+  margin-bottom: 0.3em;
+}
+.rc-co-header h1{
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.8em;
+  margin: 0;
+}
+
+.rc-checkout-grid{
+  max-width: 74em;
+  margin: 0 auto;
+  display: block;   /* mobile default: sequential, one panel at a time */
+}
+
+.rc-panel{
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--rc-line);
+  border-radius: 12px;
+  padding: 1.4em;
+}
+.rc-panel h2{
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.3em;
+  margin: 0 0 0.2em;
+}
+.rc-panel-sub{ font-size: 0.85em; color: #5B5B4F; margin: 0 0 1.2em; }
+.rc-block-label{
+  font-size: 0.8em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #5B5B4F;
+  margin: 1.2em 0 0.7em;
+}
+
+/* ---- mobile step control (mobile only — desktop always shows both) ---- */
+.rc-panel-delivery{ display: none; }
+@media (max-width: 56.24em){
+  .rc-checkout-grid.rc-step-delivery .rc-panel-summary{ display: none; }
+  .rc-checkout-grid.rc-step-delivery .rc-panel-delivery{ display: block; }
+}
+.rc-mobile-back{
+  display:flex;
+  align-items:center;
+  gap:0.4em;
+  font-size: 0.82em;
+  font-weight: 600;
+  margin-bottom: 1em;
+  color: #2B2B24;
+  background:none;
+  border:none;
+}
+.rc-mobile-back svg{ width:1em; height:1em; stroke:#2B2B24; fill:none; stroke-width:2; }
+
+/* ============================================================
+   ORDER SUMMARY (left panel)
+   ============================================================ */
+.rc-pending-banner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 1em;
+  background: #FBF3E4;
+  border: 1px solid var(--rc-gold);
+  border-radius: 8px;
+  padding: 0.8em 1em;
+  margin-bottom: 1em;
+  font-size: 0.82em;
+}
+.rc-skip-all-btn{
+  flex-shrink:0;
+  background: transparent;
+  border: 1px solid var(--rc-gold);
+  color: #2B2B24;
+  padding: 0.4em 0.8em;
+  border-radius: 999px;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.rc-summary-list{ display:flex; flex-direction:column; gap: 0.9em; }
+
+.rc-os-card{
+  border: 1px solid var(--rc-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.rc-os-card.rc-os-pending{ border-color: var(--rc-gold); }
+
+.rc-os-head{
+  display:flex;
+  align-items:center;
+  gap: 0.8em;
+  padding: 0.7em 0.9em;
+  cursor: pointer;
+}
+.rc-os-head img{
+  width: 3em; height: 3em;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink:0;
+}
+.rc-os-head-info{ flex:1; min-width:0; }
+.rc-os-head-info h4{
+  font-size: 0.9em;
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+}
+.rc-os-head-info span{ font-size: 0.76em; color: #5B5B4F; }
+.rc-os-badge{
+  font-size: 0.66em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.25em 0.6em;
+  border-radius: 999px;
+  flex-shrink:0;
+}
+.rc-os-badge.rc-badge-pending{ background: var(--rc-gold); color:#2B2B24; }
+.rc-os-badge.rc-badge-done{ background: #E4EDE0; color: var(--rc-olive); }
+.rc-os-chevron{ flex-shrink:0; width:1em; height:1em; stroke:#5B5B4F; fill:none; stroke-width:2; transition: transform .2s; }
+.rc-os-card.rc-expanded .rc-os-chevron{ transform: rotate(180deg); }
+
+.rc-os-body{ display:none; padding: 0 0.9em 1em; border-top: 1px solid var(--rc-line); }
+.rc-os-card.rc-expanded .rc-os-body{ display:block; padding-top: 0.9em; }
+
+.rc-swap-cats{ display:flex; flex-wrap:wrap; gap: 0.5em; margin-bottom: 0.9em; }
+.rc-swap-pill{
+  padding: 0.45em 0.85em;
+  border-radius: 999px;
+  font-size: 0.78em;
+  font-weight: 600;
+  border: 1px solid var(--rc-line);
+  background: #F6F1E7;
+}
+.rc-swap-pill.rc-swap-active{ border-color: var(--rc-gold); }
+.rc-swap-pill.rc-swap-changed{ background: #FBF3E4; border-color: var(--rc-gold); }
+
+.rc-swap-panel{ background: #F6F1E7; border-radius: 8px; padding: 0.8em; margin-bottom: 0.9em; }
+.rc-swap-panel .rc-swap-current{ font-size: 0.76em; color:#5B5B4F; margin-bottom: 0.5em; }
+.rc-swap-opts{ display:flex; flex-wrap:wrap; gap: 0.5em; }
+.rc-swap-opt{
+  padding: 0.4em 0.8em;
+  border-radius: 999px;
+  font-size: 0.75em;
+  border: 1px solid var(--rc-line);
+  background: #fff;
+}
+.rc-swap-opt.rc-opt-selected{ background: var(--rc-gold); border-color: var(--rc-gold); color:#2B2B24; }
+
+.rc-note-field{ margin-bottom: 0.9em; }
+.rc-note-field label{ display:block; font-size: 0.76em; color:#5B5B4F; margin-bottom: 0.3em; }
+.rc-note-field textarea{
+  width:100%;
+  border: 1px solid var(--rc-line);
+  border-radius: 6px;
+  padding: 0.6em 0.8em;
+  font-family: inherit;
+  font-size: 0.82em;
+  min-height: 4em;
+  resize: vertical;
+}
+
+.rc-os-done-btn{
+  background: var(--rc-olive);
+  color: #F6F1E7;
+  padding: 0.6em 1.2em;
+  border-radius: 999px;
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border: none;
+}
+.rc-os-skip-link{
+  margin-left: 0.9em;
+  font-size: 0.78em;
+  color: #5B5B4F;
+  text-decoration: underline;
+  background:none; border:none;
+}
+
+.rc-continue-btn{
+  width: 100%;
+  margin-top: 1.4em;
+  padding: 0.9em;
+  background: var(--rc-olive);
+  color: #F6F1E7;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.rc-continue-btn:disabled{ opacity: 0.45; cursor: not-allowed; }
+
+/* ============================================================
+   DELIVERY & PAYMENT (right panel)
+   ============================================================ */
+.rc-address-list, .rc-payment-list{ display:flex; flex-direction:column; gap: 0.6em; }
+.rc-select-card{
+  border: 1px solid var(--rc-line);
+  border-radius: 8px;
+  padding: 0.8em 1em;
+  font-size: 0.85em;
+  background:#fff;
+  text-align:left;
+}
+.rc-select-card.rc-selected{ border-color: var(--rc-olive); background: #F1F4EE; }
+
+.rc-add-address-btn{
+  width:100%;
+  margin-top: 0.6em;
+  padding: 0.7em;
+  border: 1px dashed var(--rc-line);
+  border-radius: 8px;
+  background: transparent;
+  font-size: 0.82em;
+  font-weight: 600;
+  color: #5B5B4F;
+}
+.rc-add-address-form{ margin-top: 0.7em; display:flex; flex-direction:column; gap: 0.5em; }
+.rc-add-address-form input, .rc-add-address-form textarea{
+  border: 1px solid var(--rc-line);
+  border-radius: 6px;
+  padding: 0.6em 0.8em;
+  font-family: inherit;
+  font-size: 0.82em;
+}
+.rc-save-address-btn{
+  align-self: flex-start;
+  background: var(--rc-olive);
+  color:#F6F1E7;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  font-size: 0.78em;
+  font-weight: 600;
+  border:none;
+}
+
+.rc-total-bar{
+  margin-top: 1.6em;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap: 1.2em;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--rc-line);
+  padding-top: 1.2em;
+}
+.rc-total-info{ margin-right: auto; display:flex; flex-direction:column; font-size: 0.85em; color:#5B5B4F; }
+.rc-total-info strong{ font-size: 1.2em; color:#2B2B24; }
+.rc-pay-btn{
+  padding: 0.8em 1.4em;
+  background: var(--rc-olive);
+  color:#F6F1E7;
+  border:none;
+  border-radius: 999px;
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.rc-pay-btn:disabled{ background:#bbb; cursor:not-allowed; }
+
+/* ============================================================
+   LOCK STATE (right panel before Order Summary is complete)
+   Only applies visually on desktop split-view — see media query.
+   ============================================================ */
+.rc-lock-overlay{ display:none; }
+.rc-panel-delivery.rc-locked .rc-lock-overlay{
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  backdrop-filter: blur(2.5px);
+  background: rgba(255,255,255,0.35);
+  border-radius: 12px;
+}
+.rc-panel-delivery.rc-locked button,
+.rc-panel-delivery.rc-locked input,
+.rc-panel-delivery.rc-locked textarea{
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* ============================================================
+   ORDER CONFIRMATION OVERLAY — blurs the whole checkout page
+   ============================================================ */
+.rc-confirm-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(43,43,36,0.35);
+  backdrop-filter: blur(6px);
+}
+.rc-confirm-box{
+  background: #fff;
+  border-radius: 14px;
+  padding: 2.4em 2.6em;
+  text-align:center;
+  max-width: 20em;
+}
+.rc-confirm-box svg{
+  width: 2.6em; height: 2.6em;
+  stroke: var(--rc-olive);
+  fill:none;
+  stroke-width: 2;
+  margin: 0 auto 0.8em;
+}
+.rc-confirm-box h2{
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.3em;
+  margin: 0 0 0.4em;
+  color: #2B2B24;
+}
+.rc-confirm-box p{
+  font-size: 0.85em;
+  color: #5B5B4F;
+  margin: 0;
+}
+
+/* ============================================================
+   DESKTOP: 50/50 split view, both panels visible at once
+   ============================================================ */
+@media (min-width: 56.25em){
+  .rc-checkout-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6em;
+    align-items: start;
+  }
+  .rc-panel-delivery{ display: block; }   /* always visible on desktop, locked or not */
+  .rc-mobile-back{ display:none; }
+}

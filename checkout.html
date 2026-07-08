@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Routine Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+
+<!-- ============================================================
+     CHECKOUT PAGE — standalone, self-contained
+     Desktop (>=900px): Order Summary + Delivery&Payment shown as
+     two 50/50 panels side by side. Right panel stays visually
+     unlocked-looking but is dimmed + interaction-disabled until
+     Order Summary is complete.
+     Mobile (<900px): sequential — Order Summary first, then
+     Delivery & Payment after tapping Continue.
+     ============================================================ -->
+
+<div class="rc-checkout">
+
+  <a href="cart.html" class="rc-co-back" id="rcBackLink">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+    Back to Cart
+  </a>
+
+  <div class="rc-co-header">
+    <span class="rc-co-eyebrow">Before you pay</span>
+    <h1>Checkout</h1>
+  </div>
+
+  <div class="rc-checkout-grid" id="rcCheckoutGrid">
+
+    <!-- ===================== LEFT: ORDER SUMMARY ===================== -->
+    <section class="rc-panel rc-panel-summary" id="rcPanelSummary">
+      <h2>Order Summary</h2>
+      <p class="rc-panel-sub">Tap any item to customize it</p>
+
+      <div class="rc-pending-banner" id="rcPendingBanner" style="display:none;">
+        <div class="rc-pending-text" id="rcPendingText"></div>
+        <button class="rc-skip-all-btn" id="rcSkipAllBtn">Skip all</button>
+      </div>
+
+      <div class="rc-summary-list" id="rcSummaryList"></div>
+
+      <button class="rc-continue-btn" id="rcContinueBtn" disabled>Continue to Delivery →</button>
+    </section>
+
+    <!-- ================ RIGHT: DELIVERY & PAYMENT ================ -->
+    <section class="rc-panel rc-panel-delivery rc-locked" id="rcPanelDelivery">
+      <div class="rc-lock-overlay" id="rcLockOverlay"></div>
+
+      <button class="rc-mobile-back" id="rcMobileBack">
+        <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+        Back
+      </button>
+
+      <h2>Delivery &amp; Payment</h2>
+      <p class="rc-panel-sub">Standard checkout, nothing fancy</p>
+
+      <h3 class="rc-block-label">Deliver to</h3>
+      <div class="rc-address-list" id="rcAddressList"></div>
+      <button class="rc-add-address-btn" id="rcAddAddressBtn">+ Add new address</button>
+      <div class="rc-add-address-form" id="rcAddAddressForm" style="display:none;">
+        <input type="text" id="rcNewAddrLabel" placeholder="Label (e.g. Home, Office)">
+        <textarea id="rcNewAddrText" placeholder="Full address"></textarea>
+        <button class="rc-save-address-btn" id="rcSaveAddressBtn">Save address</button>
+      </div>
+
+      <h3 class="rc-block-label">Pay with</h3>
+      <div class="rc-payment-list" id="rcPaymentList"></div>
+
+      <div class="rc-total-bar">
+        <div class="rc-total-info">
+          <span>Total</span>
+          <strong id="rcTotalOut">Rs 0</strong>
+        </div>
+        <button class="rc-pay-btn" id="rcPayBtn" disabled>Select address &amp; payment</button>
+      </div>
+    </section>
+
+  </div>
+
+</div>
+
+<!-- Order confirmation — overlays THIS page, blurs it, then redirects -->
+<div class="rc-confirm-overlay" id="rcConfirmOverlay" style="display:none;">
+  <div class="rc-confirm-box">
+    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+    <h2>Order Confirmed!</h2>
+    <p>Taking you back to the menu…</p>
+  </div>
+</div>
+
+<script src="cart-store.js"></script>
+<script src="checkout.js"></script>
+</body>
+</html>

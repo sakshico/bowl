@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart — Routine Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+<!-- ============================================================
+     CART PAGE — standalone, lightweight
+     Kept fast/simple on purpose: items, quantity, remove,
+     subtotal, Proceed. No customization here — that happens on
+     checkout.html (Order Summary step) to keep this page quick.
+     ============================================================ -->
+
+<div class="rc-cart">
+
+  <a href="bowls.html" class="rc-cart-back">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+    Back to Menu
+  </a>
+
+  <h1 class="rc-cart-title">Your Cart</h1>
+
+  <div class="rc-cart-list" id="rcCartList"></div>
+
+  <div class="rc-cart-empty" id="rcCartEmpty" style="display:none;">
+    <p>Your cart is empty.</p>
+    <a href="bowls.html" class="rc-empty-btn">Browse the Menu →</a>
+  </div>
+
+  <div class="rc-cart-footer" id="rcCartFooter">
+    <div class="rc-cart-subtotal">
+      <span>Subtotal</span>
+      <strong id="rcSubtotalOut">Rs 0</strong>
+    </div>
+    <a href="checkout.html" class="rc-proceed-btn" id="rcProceedBtn">Proceed →</a>
+  </div>
+
+</div>
+
+<script src="cart-store.js"></script>
+<script src="cart.js"></script>
+</body>
+</html>

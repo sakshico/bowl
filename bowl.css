@@ -1,0 +1,446 @@
+/* ==========================================================================
+   ROUTINE CLUB — shared stylesheet
+   Design tokens live at the top; every color/spacing/type value in the
+   file is derived from these so the whole site stays in one visual system.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap');
+
+:root{
+  /* ---- color ---- */
+  --cream:        #F6F1E7;
+  --cream-soft:   #EFE7D6;
+  --ink:          #262620;
+  --ink-soft:     #4a4a42;
+  --green:        #47583C;
+  --green-deep:   #3B4A32;
+  --gold:         #C6982E;
+  --gold-soft:    #DAB86A;
+  --line:         #DCD3BE;
+  --cream-a:      rgba(246,241,231,0.9);
+
+  /* ---- type ---- */
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'Poppins', sans-serif;
+  --font-script:  'Dancing Script', cursive;
+
+  /* ---- fluid scale : same ratio on every viewport ---- */
+  --fs-h1:   clamp(2.1rem, 1.35rem + 3.2vw, 3.6rem);
+  --fs-h2:   clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem);
+  --fs-h3:   clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
+  --fs-lead: clamp(0.95rem, 0.88rem + 0.3vw, 1.05rem);
+  --fs-body: clamp(0.88rem, 0.84rem + 0.15vw, 0.98rem);
+  --fs-nav:  clamp(0.72rem, 0.68rem + 0.15vw, 0.8rem);
+  --fs-script: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+
+  /* ---- layout ---- */
+  --container: min(1200px, 92vw);
+  --radius: 6px;
+  --gap: clamp(1.2rem, 1rem + 1vw, 2.2rem);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:var(--fs-body);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ margin:0; padding:0; list-style:none; }
+button{ font-family:inherit; cursor:pointer; }
+:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+.container{
+  width:var(--container);
+  margin-inline:auto;
+}
+
+h1,h2,h3{ font-family:var(--font-display); margin:0; color:var(--ink); font-weight:600; }
+.script{
+  font-family:var(--font-script);
+  color:var(--gold);
+  font-size:var(--fs-script);
+  font-weight:600;
+  display:inline-block;
+}
+
+/* ---- divider with leaf ---- */
+.leaf-rule{
+  display:flex;
+  align-items:center;
+  gap:0.7rem;
+  width:min(200px,40vw);
+  margin:1.1rem 0 1.4rem;
+}
+.leaf-rule::before,.leaf-rule::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:var(--green);
+  opacity:0.55;
+}
+.leaf-rule svg{ flex-shrink:0; width:18px; height:18px; color:var(--green); }
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.6rem;
+  padding:0.9em 1.7em;
+  font-size:var(--fs-nav);
+  letter-spacing:0.09em;
+  text-transform:uppercase;
+  font-weight:500;
+  border:1px solid transparent;
+  border-radius:2px;
+  transition:transform .25s ease, background .25s ease, color .25s ease;
+}
+.btn svg{ width:14px; height:14px; transition:transform .25s ease; }
+.btn:hover svg{ transform:translateX(3px); }
+.btn-primary{ background:var(--green); color:var(--cream); }
+.btn-primary:hover{ background:var(--green-deep); }
+.btn-outline{ background:transparent; color:var(--cream); border-color:var(--cream); }
+.btn-outline:hover{ background:var(--cream); color:var(--green-deep); }
+
+/* ==========================================================================
+   HEADER / NAV  — identical markup on every page
+   ========================================================================== */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--cream-a);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1.1rem 0;
+}
+.brand{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  line-height:1;
+}
+.brand svg{ width:20px; height:20px; color:var(--green); margin-bottom:0.25rem; }
+
+
+.nav-links{
+  display:flex;
+  gap: 36px;
+}
+.nav-links a{
+  font-size:var(--fs-nav);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--ink-soft);
+  position:relative;
+  padding-bottom:0.3rem;
+}
+
+
+.nav-links a:hover{ color:var(--gold); }
+
+.nav-icons{ display:flex; align-items:center; gap:1.1rem; }
+.icon-btn{
+  position:relative;
+  width:38px; height:38px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:50%;
+  border:1px solid var(--line);
+  color:var(--ink);
+  background:transparent;
+  flex-shrink:0;
+}
+.icon-btn svg{ width:16px; height:16px; }
+.cart-badge{
+  position:absolute; top:-4px; right:-4px;
+  background:var(--gold); color:var(--cream);
+  font-size:0.55rem; font-weight:600;
+  width:15px; height:15px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+.hamburger{ display:none; }
+
+/* mobile nav drawer */
+.mobile-drawer{
+  display:none;
+  position:absolute;
+  top:100%; left:0; right:0;
+  background:var(--cream);
+  border-bottom:1px solid var(--line);
+  flex-direction:column;
+  padding:0.5rem var(--gap) 1.5rem;
+}
+.mobile-drawer a{
+  padding:0.85rem 0;
+  border-bottom:1px solid var(--line);
+  font-size:var(--fs-nav);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.mobile-drawer a.active{ color:var(--gold); }
+.site-header.open .mobile-drawer{ display:flex; }
+
+@media (max-width:880px){
+  .nav-links{ display:none; }
+  .hamburger{
+    display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--ink);
+  }
+  .hamburger svg{ width:18px; height:18px; }
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero{
+  position:relative;
+  min-height: clamp(460px, 58vw, 700px);
+  display:flex;
+  align-items:center;
+  background-color:var(--cream-soft);   /* shows until a photo is added */
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  overflow:hidden;
+}
+
+.hero .container{ position:relative; z-index:2; }
+.hero-grid{
+  display:grid;
+  grid-template-columns: minmax(280px,0.85fr) 1fr;
+  gap: var(--gap);
+  align-items:center;
+}
+hero-copy{ max-width:560px; }
+.hero-copy .script{ margin-bottom:0.4rem; }
+.hero-copy h1{ font-size:var(--fs-h1); line-height:1.12; }
+.hero-copy h1 .accent{ color:var(--gold); font-style:italic; }
+.hero-copy p.lead{
+  font-size:var(--fs-lead);
+  color:var(--ink-soft);
+  max-width:38ch;
+  margin:0.3rem 0 1.6rem;
+}
+@media (max-width:900px){
+  .hero-overlay{
+    background:linear-gradient(180deg,
+      var(--cream) 0%, var(--cream) 42%,
+      rgba(246,241,231,0.6) 65%, rgba(246,241,231,0) 100%);
+  }
+  .hero-copy{ max-width:100%; }
+}
+/* if the user drops a real image in, just set background-image on this
+   class (or swap the <div> for an <img>) — layout/ratio stays identical */
+
+
+/* ==========================================================================
+   FEATURES BAR
+   ========================================================================== */
+.features{ background:var(--green-deep); color:var(--cream); height:auto; }
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap: clamp(1rem,2vw,2rem);
+  padding: clamp(2.2rem,4vw,3.2rem) 0;
+}
+.feature{ text-align:center; padding:0 0.4rem; }
+.feature .ring{
+  width: clamp(40px, 8vw, 56px);
+  height: clamp(40px, 8vw, 56px);
+  margin: 0 auto clamp(0.6rem, 1.5vw, 1rem);
+  border: 2px solid var(--gold-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature .ring svg{
+  width: clamp(16px, 3.2vw, 22px);
+  height: clamp(16px, 3.2vw, 22px);
+  color: var(--gold-soft);
+}
+.feature h3{
+  font-size: clamp(0.68rem, 1.6vw, 1.15rem);   /* shrinks enough to avoid 2-line wraps on phones */
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.feature p{
+  font-size: clamp(0.6rem, 1.4vw, 0.82rem);
+  color: var(--cream);
+  opacity: 0.75;
+  margin: 0;
+  line-height: 1.4;
+}
+/* ==========================================================================
+   ABOUT / SPLIT SECTION
+   ========================================================================== */
+
+
+.about .container{ position:relative; z-index:2; padding-top: clamp(1.6rem, 3vw, 2.6rem);
+  padding-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+.about{
+  position: relative;
+  display: block;
+  min-height: 0;
+  background-color: var(--cream-soft);
+  background-size: 100% clamp(200px, 42vw, 460px);  /* image height scales with screen width */
+  background-position: top center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  padding-bottom: clamp(2rem, 3vw, 3rem);
+}
+ .about-photo{
+  width: 100%;
+  height: clamp(200px, 42vw, 460px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.about-grid{
+  display:block;
+}
+.about-copy h2{ font-size:var(--fs-h2); margin-bottom:0.2rem; }
+.about-copy p{ color:var(--ink-soft); max-width:30ch; margin:0 0 1.5rem; }
+
+
+/* ==========================================================================
+   PAGE BANNER (for inner pages: bowls / build-your-own / our-story / contact)
+   ========================================================================== */
+
+/* simple contact form */
+.contact-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--gap);
+  padding:clamp(2.5rem,2rem+2vw,2.5rem) 0 clamp(3rem,2.5rem+2vw,5rem);
+}
+.form-field{ margin-bottom:1.1rem; }
+.form-field label{
+  display:block; font-size:0.78rem; letter-spacing:0.06em;
+  text-transform:uppercase; color:var(--ink-soft); margin-bottom:0.2rem;
+}
+.form-field input,.form-field textarea{
+  width:100%; padding:0.8em 1em;
+  border:1px solid var(--line); border-radius:2px;
+  background:var(--cream); font-family:inherit; font-size:0.9rem; color:var(--ink);
+}
+.form-field textarea{ resize:vertical; min-height:120px; }
+.contact-info h2{ font-size:var(--fs-h2); margin-bottom:1rem; }
+.contact-info p{ color:var(--ink-soft); margin-bottom:1.6rem; }
+.contact-info .row{ display:flex; gap:0.8rem; align-items:flex-start; margin-bottom:1.1rem; }
+.contact-info .row svg{ width:18px; height:18px; color:var(--green); margin-top:0.2rem; flex-shrink:0; }
+.contact-info .row strong{ display:block; font-size:0.85rem; }
+.contact-info .row span{ font-size:0.82rem; color:var(--ink-soft); }
+@media (max-width: 26em){
+  .contact-wrap{
+    gap: clamp(0.8rem, 4vw, var(--gap));
+  }
+  .contact-info .row{
+    gap: 0.5rem;
+  }
+}
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer{ background:var(--green-deep); color:var(--cream); }
+.footer-grid{
+  display:grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+  gap:var(--gap);
+  padding:clamp(2.6rem,2rem+2vw,4rem) 0 clamp(1.5rem,1.2rem+1vw,2rem);
+}
+.footer-brand .name{
+  font-family:var(--font-display);
+  font-size:1.2rem; letter-spacing:0.1em; color:var(--cream);
+}
+.footer-brand .sub{
+  font-family:var(--font-script); color:var(--gold-soft); font-size:1rem; display:block; margin:0.2rem 0 0.9rem;
+}
+.footer-brand svg.leaf{ width:18px; height:18px; color:var(--gold-soft); margin-bottom:0.3rem; }
+.footer-brand p{ font-size:0.82rem; color:var(--cream); opacity:0.75; max-width:26ch; margin:0 0 1.1rem; }
+.socials{ display:flex; gap:0.7rem; }
+.socials a{
+  width:32px; height:32px; border:1px solid rgba(246,241,231,0.4);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+}
+.socials a svg{ width:30px; height:30px; }
+.footer-col h4{
+  font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--cream); margin-bottom:1.1rem; font-family:var(--font-body); font-weight:600;
+}
+.footer-col a{ display:block; font-size:0.85rem; color:var(--cream); opacity:0.75; margin-bottom:0.7rem; }
+.footer-col a:hover{ opacity:1; color:var(--gold-soft); }
+.newsletter p{ font-size:0.85rem; opacity:0.75; margin-bottom:1.1rem; }
+.newsletter-form{ display:flex; border:1px solid rgba(246,241,231,0.4); border-radius:2px; overflow:hidden; }
+.newsletter-form input{
+  flex:1; background:transparent; border:none; padding:0.75em 1em;
+  color:var(--cream); font-family:inherit; font-size:0.82rem;
+}
+.newsletter-form input::placeholder{ color:rgba(246,241,231,0.6); }
+.newsletter-form button{
+  width:42px; flex-shrink:0; border:none; background:transparent; color:var(--cream);
+  display:flex; align-items:center; justify-content:center; border-left:1px solid rgba(246,241,231,0.4);
+}
+.newsletter-form button svg{ width:16px; height:16px; }
+.footer-bottom{
+  text-align:center; font-size:0.75rem; opacity:0.6;
+  padding:1.1rem 0; border-top:1px solid rgba(246,241,231,0.2);
+}
+
+/* ==========================================================================
+   RESPONSIVE — one consistent set of breakpoints, ratios preserved
+   ========================================================================== */
+
+@media (max-width: 900px){
+  .footer-grid{
+    grid-template-columns: 1fr 1fr;
+  }
+  .newsletter{
+    grid-column: 1 / -1;   /* newsletter always spans full width */
+  }
+}
+ 
+@media (max-width: 560px){
+  .features-grid{ grid-template-columns:repeat(2,1fr); }
+  .card-grid{ grid-template-columns:1fr; }
+ 
+  /* keep footer as 2 columns instead of collapsing to 1 */
+  .footer-grid{
+    grid-template-columns: 1fr 1fr;
+  }
+  /* remove the old full-width span so brand sits side-by-side
+     with Quick Links instead of taking the whole row */
+  .footer-brand{
+    grid-column: auto;
+  }
+  .newsletter{
+    grid-column: 1 / -1;
+  }
+}

@@ -1,0 +1,149 @@
+
+.brand .name{
+  font-family:"Petit Formal Script", "Brush Script MT";
+  font-weight: 400;
+  font-size: 4.1em;
+  color: var(--rc-ink);
+  line-height: 1.15;
+  margin: 0;
+}
+.brand .sub{
+  font-size:0.58rem;
+  letter-spacing:0.35em;
+  color:var(--green);
+  margin-top:0.35rem;
+  padding-top:0.35rem;
+  border-top:1px solid var(--ink);
+  width:100%;
+  text-align:center;
+}
+
+.rc-menu{
+  /* local scaling root — independent of the rest of your page */
+  font-size: clamp(11px, 1.55vw + 5px, 19px);
+  font-family: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  color: #2B2B24;
+  box-sizing: border-box;
+}
+.rc-menu *{ box-sizing: border-box; }
+.rc-menu img{ max-width: 100%; display: block; }
+.rc-menu a{ text-decoration: none; color: inherit; }
+ 
+/* Local color tokens (scoped, won't leak to rest of your CSS) */
+.rc-menu{
+  --rc-cream:   #F6F1E7;
+  --rc-cream-2: #EFE8D8;
+  --rc-olive:   #4B5A3F;
+  --rc-gold:    #B8863B;
+  --rc-ink:     #2B2B24;
+  --rc-ink-soft:#5B5B4F;
+  --rc-white:   #FFFFFF;
+  --rc-line:    rgba(43,43,36,0.15);
+}
+ 
+/* ---------- Row layout ---------- */
+.rc-menu-row{
+  display: grid;
+  grid-template-columns: 15em 1fr;
+  align-items: center;
+  gap: 1.5em;
+  padding: 2.6em 0;
+  border-bottom: 1px solid var(--rc-line);
+}
+.rc-menu-row:nth-child(even){
+  background: var(--rc-cream-2);
+}
+ 
+/* ---------- Left label (name + description) ---------- */
+.rc-menu-label{
+  padding-left: 3.2em;
+  transition: opacity .35s ease;
+  opacity: 1;
+}
+.rc-menu-label h2{
+  font-family: "Petit Formal Script", "Brush Script MT", cursive;
+  font-weight: 400;
+  font-size: 2.1em;
+  color: var(--rc-ink);
+  line-height: 1.15;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.rc-menu-label p{
+  margin: 0.9em 0 0;
+  font-size: 0.82em;
+  color: var(--rc-ink-soft);
+  max-width: 13em;
+  line-height: 1.6;
+}
+ 
+
+ 
+/* ---------- Right side: horizontal scroll strip ---------- */
+.rc-menu-scroll{
+  display: flex;
+  gap: 1.8em;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 0.4em 3.2em 0.6em 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rc-olive) transparent;
+}
+.rc-menu-scroll::-webkit-scrollbar{ height: 5px; }
+.rc-menu-scroll::-webkit-scrollbar-thumb{ background: var(--rc-olive); border-radius: 3px; }
+.rc-menu-scroll::-webkit-scrollbar-track{ background: transparent; }
+ 
+.rc-bowl-item{
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  text-align: center;
+  width: 9.5em;
+}
+.rc-bowl-img{
+  width: 10.5em;
+  height: 10.5em;
+  border-radius: 50%;
+  background: var(--rc-white);
+  border: 1px solid var(--rc-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--rc-ink-soft);
+  font-size: 0.62em;
+  line-height: 1.4;
+  padding: 0em;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.rc-bowl-img img{
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 50%;
+}
+.rc-bowl-item a:hover .rc-bowl-img{
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 1em 1.6em rgba(43,43,36,0.12);
+}
+.rc-bowl-name{
+  margin-top: 0.9em;
+  font-size: 0.72em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--rc-ink);
+  line-height: 1.4;
+}
+ 
+/* Safety tweak only for extremely narrow screens */
+@media (max-width: 21.25em){
+  .rc-menu-label{ padding-left: 1.4em; }
+  .rc-menu-scroll{ padding-right: 1.4em; }
+}
+ 

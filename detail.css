@@ -1,0 +1,341 @@
+/* ============================================================
+   BOWL DETAIL PAGE — standalone, scoped styles
+   Everything lives under .rc-detail so it can't clash with your
+   other pages' CSS. Uses its own font-size scaling (clamp + em)
+   so it scales proportionally on any screen, independent of the
+   rest of your site.
+   ============================================================ */
+ 
+html, body{ margin:0; padding:0; }
+ 
+.rc-detail{
+  font-size: clamp(11px, 1.55vw + 5px, 19px);
+  font-family: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  --rc-cream: #F6F1E7;
+  --rc-gold:  #B8863B;
+  --rc-olive: #4B5A3F;
+  --rc-ink:   #2B2B24;
+}
+.rc-detail *{ box-sizing: border-box; }
+.rc-detail img{ -webkit-user-drag: none; user-select: none; }
+ 
+/* ---------- Stage (holds the two flipping layers) ---------- */
+.rc-detail-stage{
+  position: absolute;
+  inset: 0;
+  perspective: 220em;
+}
+ 
+.rc-page{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rc-cream);
+}
+.rc-page-back{ z-index: 1; }
+.rc-page-front{
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+.rc-page-front.rc-flipping{
+  transition: transform 0.85s cubic-bezier(.61,.05,.36,.99);
+}
+ 
+/* fold shadow overlay while flipping, purely cosmetic */
+.rc-page-front::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.45), transparent 40%, transparent 60%, rgba(0,0,0,0.45));
+  opacity:0;
+  pointer-events:none;
+}
+.rc-page-front.rc-flipping::after{
+  animation: rcFoldShadow 0.85s ease;
+}
+@keyframes rcFoldShadow{
+  0%   { opacity: 0; }
+  45%  { opacity: 0.55; }
+  55%  { opacity: 0.55; }
+  100% { opacity: 0; }
+}
+ 
+/* ---------- The poster image itself ----------
+   MOBILE (default): shown exactly as designed — full portrait
+   poster, untouched, nothing cropped.
+   DESKTOP (min-width 768px): the SAME image is rotated 90deg —
+   no redesign, no cropping, just turned sideways so it reads
+   name-on-top / ingredients-on-left / photo-on-right. */
+.rc-page-photo{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+ 
+@media (min-width: 48em){
+  .rc-page-photo{
+    width: 100vh;
+    height: 100vw;
+    max-width: 100vh;
+    max-height: 100vw;
+    transform: rotate(90deg);
+  }
+}
+ 
+/* ---------- Back to Menu ---------- */
+.rc-detail-back{
+  position: fixed;
+  top: 1.9em;
+  left: 1.6em;
+  z-index: 20;
+  display:flex;
+  align-items:center;
+  gap:0.5em;
+  padding: 0.7em 1.2em;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  color: var(--rc-cream);
+  font-size: 0.85em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration:none;
+  transition: background .2s;
+}
+.rc-detail-back:hover{ background: rgba(0,0,0,0.65); }
+.rc-detail-back svg{
+  width: 1em; height:1em;
+  stroke: var(--rc-cream);
+  fill:none;
+  stroke-width: 2;
+}
+ 
+/* ---------- Prev / Next click zones ---------- */
+.rc-nav-zone{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 4.5em;
+  z-index: 15;
+  background: transparent;
+  border:none;
+  display:flex;
+  align-items:center;
+  cursor: pointer;
+  opacity: 2;
+  transition: opacity 0.2s, background .2s;
+}
+.rc-nav-zone:hover{
+  opacity: 1;
+  background: linear-gradient(90deg, rgba(0,0,0,0.25), transparent);
+}
+.rc-nav-next:hover{
+  background: linear-gradient(270deg, rgba(0,0,0,0.25), transparent);
+}
+.rc-nav-prev{ left:0; justify-content: flex-start; padding-left: 1em; }
+.rc-nav-next{ right:0; justify-content: flex-end; padding-right: 1em; }
+.rc-nav-zone .rc-nav-icon{
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: background .2s, transform .15s;
+}
+.rc-nav-zone:hover .rc-nav-icon{
+  background: rgba(0,0,0,0.6);
+  transform: scale(1.06);
+}
+.rc-nav-zone svg{
+  width: 2.4em; height: 2.4em;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: background .2s, transform .15s;
+}
+
+/* ---------- Inline "Customize?" prompt (no modal, no blur) ---------- */
+.rc-customize-prompt{
+  position: fixed;
+  top: 5em;
+  right: 1.6em;
+  z-index: 20;
+  display:flex;
+  align-items:center;
+  gap:0.5em;
+  padding: 0.7em 1.2em;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  color: var(--rc-cream);
+  font-size: 0.85em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration:none;
+  transition: background .2s;
+}
+.rc-cp-yes, .rc-cp-skip{
+  padding: 0.4em 0.9em;
+  border-radius: 999px;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.rc-cp-yes{ background: var(--rc-gold); color: #2B2B24; }
+.rc-cp-skip{ background: transparent; border: 1px solid rgba(246,241,231,0.5); color: var(--rc-cream); }
+
+
+/* ---------- "View Cart" toast ---------- */
+.rc-view-cart-toast{
+position: fixed;
+  bottom: 5em;
+  left: 1.6em;
+  z-index: 20;
+  display:flex;
+  align-items:center;
+  gap:0.5em;
+  padding: 0.7em 1.2em;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  color: var(--rc-cream);
+  font-size: 0.85em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration:none;
+  transition: background .2s;
+}
+.rc-toast-link{
+  color: var(--rc-gold);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+
+ /* ---------- Fav + Add to Cart ---------- */
+.rc-detail-actions{
+  position: fixed;
+  top: 1.3em;
+  right: 1.6em;
+  z-index: 20;
+  display:flex;
+  align-items:center;
+  gap: 0.8em;
+}
+.rc-fav-btn{
+  width: 2.8em;
+  height: 2.8em;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: background .2s, transform .15s;
+}
+.rc-fav-btn:hover{ background: rgba(0,0,0,0.65); transform: scale(1.06); }
+.rc-fav-btn svg{
+  width: 1.2em; height: 1.2em;
+  stroke: var(--rc-cream);
+  fill: none;
+  stroke-width: 1.8;
+  transition: fill .2s, stroke .2s;
+}
+.rc-fav-btn.rc-fav-active svg{
+  fill: var(--rc-gold);
+  stroke: var(--rc-gold);
+}
+ 
+.rc-cart-btn{
+  display:flex;
+  align-items:center;
+  gap: 0.55em;
+  padding: 0.7em 1.2em;
+  background: var(--rc-olive);
+  color: var(--rc-cream);
+  font-size: 0.85em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 999px;
+  transition: background .2s, transform .15s;
+}
+.rc-cart-btn:hover{ background: #3a4632; transform: translateY(-1px); }
+.rc-cart-btn svg{
+  width: 1.1em; height: 1.1em;
+  stroke: var(--rc-cream);
+  fill: none;
+  stroke-width: 1.8;
+}
+.rc-cart-btn.rc-cart-added{
+  background: var(--rc-gold);
+}
+/* ---------- Counter ---------- */
+.rc-detail-counter{
+  position: fixed;
+  bottom: 1.6em;
+  right: 1.8em;
+  z-index: 20;
+  color: var(--rc-cream);
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+  background: rgba(0,0,0,0.4);
+  padding: 0.4em 0.9em;
+  border-radius: 999px;
+}
+ 
+/* ---------- Empty state (direct visit, nothing selected) ---------- */
+#rcData{ display:none; }
+ 
+.rc-detail-empty{
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: var(--rc-cream);
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  gap: 1.2em;
+  color: var(--rc-ink);
+  font-size: 1em;
+  text-align:center;
+}
+.rc-empty-btn{
+  padding: 0.9em 1.8em;
+  background: var(--rc-olive);
+  color: var(--rc-cream);
+  text-decoration:none;
+  border-radius: 3px;
+  font-size: 0.85em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+ 
+@media (max-width: 21.25em){
+  .rc-page-caption{ padding: 2em 1.4em 2.4em; }
+}
+ 

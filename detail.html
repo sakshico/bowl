@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bowl Detail — Routine Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="detail.css">
+</head>
+<body>
+
+<!-- ============================================================
+     BOWL DETAIL PAGE — standalone, self-contained
+ 
+     HOW TO ADD YOUR ITEMS:
+     Scroll down to the "ALL CATEGORY DATA" block below. Each
+     category is its own <div class="rc-category" data-category="...">.
+     Inside it, add one <div class="rc-item" data-name="..."> PER
+     BOWL, with a normal <img src="..."> inside it — data-name
+     must match the name shown on your menu page.
+ 
+     Example:
+       <div class="rc-item" data-name="Ruby Bloom">
+         <img src="img/ruby-bloom.png" alt="Ruby Bloom">
+       </div>
+ 
+     No JavaScript editing needed — just copy/paste more rc-item
+     divs and swap the name + image.
+     ============================================================ -->
+ 
+<div class="rc-detail">
+ 
+  <a href="bowls.html" class="rc-detail-back">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+    Back to Menu
+  </a>
+ 
+  <div class="rc-detail-stage" id="rcStage">
+    <div class="rc-page rc-page-back" id="rcPageBack">
+      <img class="rc-page-photo" id="rcPhotoBack" src="" alt="">
+    </div>
+    <div class="rc-page rc-page-front" id="rcPageFront">
+      <img class="rc-page-photo" id="rcPhotoFront" src="" alt="">
+    </div>
+  </div>
+ 
+  <button class="rc-nav-zone rc-nav-prev" id="rcPrevBtn" aria-label="Previous">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+  </button>
+  <button class="rc-nav-zone rc-nav-next" id="rcNextBtn" aria-label="Next">
+    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+ 
+  <div class="rc-detail-counter" id="rcCounter"></div>
+ <div class="rc-detail-actions" id="rcActions">
+    <button class="rc-fav-btn" id="rcFavBtn" aria-label="Add to favorites">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.65 12 21 12 21z"/></svg>
+    </button>
+    <button class="rc-cart-btn" id="rcCartBtn">
+      <svg viewBox="0 0 24 24"><path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.8h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+      Add to Cart
+    </button>
+   
+  </div>
+
+  <div class="rc-customize-prompt" id="rcCustomizePrompt" style="display:none;">
+      <span>Customize this bowl?</span>
+      <button class="rc-cp-yes" id="rcCustomizeYes">Yes</button>
+      <button class="rc-cp-skip" id="rcCustomizeSkip">Skip</button>
+    </div>
+  </div>
+
+ <div class="rc-view-cart-toast" id="rcViewCartToast" style="display:none;">
+    <span id="rcToastText">Added to cart</span>
+    <a href="cart.html" class="rc-toast-link">View Cart →</a>
+  </div>
+ 
+
+
+  <div class="rc-detail-empty" id="rcEmptyState" style="display:none;">
+    <p>No bowl selected yet.</p>
+    <a href="bowls.html" class="rc-empty-btn">Go to Menu →</a>
+  </div>
+ 
+</div>
+ 
+<!-- ============================================================
+     ALL CATEGORY DATA — edit this directly, no JS needed.
+     This block is hidden (display:none in CSS) — it's just data
+     that bowl-detail.js reads to build the slides.
+     ============================================================ -->
+<div id="rcData" style="display:none">
+ 
+  <div class="rc-category" data-category="smoothies">
+    <div class="rc-item" data-name="Ruby Bloom" data-price="249"><img src="img/1 Ruby bloom.jpeg" alt="Ruby Bloom"></div>
+    <div class="rc-item" data-name="Cherry Muse" data-price="249"><img src="img/2 Cherry muse.jpeg" alt="Cherry Muse"></div>
+    <div class="rc-item" data-name="Blue Lagoon" data-price="249"><img src="img/3 Blue lagoon.jpeg" alt="Blue Lagoon"></div>
+    <div class="rc-item" data-name="Golden Solstice" data-price="249"><img src="img/4 Golden solstice.jpeg" alt="Golden Solstice"></div>
+    <div class="rc-item" data-name="Emerald Echo" data-price="249"><img src="img/5 Emerald ecen.jpeg" alt="Emerald Echo"></div>
+    <div class="rc-item" data-name="Midnight harvest" data-price="249"><img src="img/6 Midnight harvest.jpeg" alt="Midnight harvest"></div>
+    <div class="rc-item" data-name="Yugurt bowl" data-price="249"><img src="img/7 Yugurt bowl.jpeg" alt="Yugurt bowl"></div>
+    <div class="rc-item" data-name="Velvet noir" data-price="249"><img src="img/8 Velvet noir.jpeg" alt="Velvet noir"></div>
+  </div>
+ 
+  <div class="rc-category" data-category="indian-rice-bowl">
+    <div class="rc-item" data-name="Golden Glow Bowl" data-price="349"><img src="img/15 Golden glow bowl.jpeg" alt="Golden Glow Bowl"></div>
+    <div class="rc-item" data-name="Paneer Pepper Pilaf" data-price="349"><img src="img/16 Paneer pepper pilaf.jpeg" alt="Paneer Pepper Pilaf"></div>
+    <div class="rc-item" data-name="Velvet Paneer Bowl" data-price="349"><img src="img/17 Velvet paneer bowl.jpeg" alt="Velvet Paneer Bowl"></div>
+    <div class="rc-item" data-name="Green Garden Delight" data-price="349"><img src="img/18 Green garden delight.jpeg" alt="Green Garden Delight"></div>
+    <div class="rc-item" data-name="Creamwood Harvest" data-price="349"><img src="img/19 Creamwood harwest.jpeg" alt="Creamwood Harvest"></div>
+     <div class="rc-item" data-name="Herb & hearth bowl" data-price="349"><img src="img/20 Herb & hearth bowl.jpeg" alt="Herb & hearth bowl"></div>
+      <div class="rc-item" data-name="Sunrise nourish bowl" data-price="349"><img src="img/21 Sunrise nourish bowl.jpeg" alt="Sunrise nourish bowl"></div>
+       <div class="rc-item" data-name="Rustic bean harmony" data-price="349"><img src="img/22 Rustic bean harmony.jpeg" alt="Rustic bean harmony"></div>
+  </div>
+ 
+  <div class="rc-category" data-category="rice-bowl">
+    <div class="rc-item" data-name="Paneer garden Rice Bowl" data-price="299"><img src="img/23 Paneer garden Rice Bowl.jpeg" alt="Paneer garden Rice Bowl"></div>
+    <div class="rc-item" data-name="Protein fiesta Bowl" data-price="299"><img src="img/24 Protein fiesta Bowl.jpeg" alt="Protein fiesta Bowl"></div>
+    <div class="rc-item" data-name="Mediterranean chicken bowl" data-price="299"><img src="img/25 Mediterranean chicken bowl.jpeg" alt="Mediterranean chicken bowl"></div>
+    <div class="rc-item" data-name="Green powder Bowl" data-price="299"><img src="img/26 Green powder Bowl.jpeg" alt="Green powder Bowl"></div>
+    <div class="rc-item" data-name="Green chicken Bowl" data-price="299"><img src="img/27 Green chicken Bowl.jpeg" alt="Green chicken Bowl"></div>
+    <div class="rc-item" data-name="Salmon harvest Bowl" data-price="299"><img src="img/28 Salmon harvest Bowl.jpeg" alt="Salmon harvest Bowl"></div>
+  </div>
+ 
+  <div class="rc-category" data-category="salads">
+    <div class="rc-item" data-name="Green strawberry" data-price="199"><img src="img/29 Green strawberry.jpeg" alt="Green strawberry"></div>
+    <div class="rc-item" data-name="Greek power bowl" data-price="199"><img src="img/30 Greek power bowl.jpeg" alt="Greek power bowl"></div>
+    <div class="rc-item" data-name="Harvest protien bowl" data-price="199"><img src="img/31 Harvest protien bowl.jpeg" alt="Harvest protien bowl"></div>
+    <div class="rc-item" data-name="Classic garden Salad" data-price="199"><img src="img/32 Classic garden Salad.jpeg" alt="Classic garden Salad"></div>
+    <div class="rc-item" data-name="Rainbow garden bowl" data-price="199"><img src="img/33 Rainbow garden bowl.jpeg" alt="Rainbow garden bowl"></div>
+    <div class="rc-item" data-name="Smoky fiesta bowl" data-price="199"><img src="img/34 Smoky fiesta bowl.jpeg" alt="Smoky fiesta bowl"></div>
+    <div class="rc-item" data-name="Creamy crunch bowl" data-price="199"><img src="img/35 Creamy crunch bowl.jpeg" alt="Creamy crunch bowl"></div>
+  </div>
+ 
+  <div class="rc-category" data-category="dumplings">
+    <div class="rc-item" data-name="Dumpling soup" data-price="149"><img src="img/9 Dumpling soup.jpeg" alt="Dumpling soup"></div>
+    <div class="rc-item" data-name="Sunset shumai bowl" data-price="149"><img src="img/10 Sunset shumai bowl.jpeg" alt="Sunset shumai bowl"></div>
+    <div class="rc-item" data-name="Red velvet momos" data-price="149"><img src="img/11 Red velvet momos.jpeg" alt="Red velvet momos"></div>
+    <div class="rc-item" data-name="Golden bliss bowl" data-price="149"><img src="img/12 Golden bliss bowl.jpeg" alt="Golden bliss bowl"></div>
+    <div class="rc-item" data-name="Fire & silk dumplings" data-price="149"><img src="img/13 Fire & silk dumplings.jpeg" alt="Fire & silk dumplings"></div>
+    <div class="rc-item" data-name="Volcano ramen bowl" data-price="149"><img src="img/14 Volcano ramen bowl.jpeg" alt="Volcano ramen bowl"></div>
+  </div>
+ 
+</div>
+
+ 
+
+<script src="cart-store.js"></script>
+<script src="detail.js"></script>
+</body>
+</html>
